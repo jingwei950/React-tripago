@@ -4,13 +4,15 @@ import { useFetch } from "../hooks/useFetch";
 
 function TripList() {
   const [url, setUrl] = useState("http://localhost:3000/trips");
-  const { data: trips, isPending } = useFetch(url); //Custom hook
+  const { data: trips, isPending, error } = useFetch(url); //Custom hook
 
   return (
     <div className="trip-list">
       <h2>Trip List</h2>
       {/*Show loading message when the pending in custom hook is true*/}
       {isPending && <div>Loading Trips...</div>}
+      {/*Show error message when the error in custom hook is true*/}
+      {error && <div>{error}</div>}
       <ul>
         {trips &&
           trips.map((trip) => {
